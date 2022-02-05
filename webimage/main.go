@@ -1,27 +1,21 @@
 package main
 
 import (
-    "context"
-    "fmt"
-    "github.com/go-redis/redis/v8"
-    "strconv"
-    "log"
-    "net/http"
+	"context"
+	"fmt"
+	"github.com/go-redis/redis/v8"
+	"log"
+	"net/http"
+	"strconv"
 )
 
 var ctx = context.Background()
 
 func main() {
 
-    //http.HandleFunc("/increment", func(w http.ResponseWriter, r *http.Request) {
-    //    fmt.Println("in handfunc")
-    //    counterVal := webCounter()
-    //    fmt.Fprintf(w, "Holla! we have hit %s times", counterVal)
-    //})
+	http.HandleFunc("/", webCounter)
 
-    http.HandleFunc("/", webCounter)
-
-    log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
 func webCounter(w http.ResponseWriter, r *http.Request) {
@@ -46,11 +40,11 @@ func webCounter(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-    fmt.Fprintf(w, "Holla! we have hit %s times", val)
+	fmt.Fprintf(w, "Holla! we have hit %s times", val)
 }
 
 func storeValue(rdb *redis.Client, value string) {
-    fmt.Println("About to store value")
+	fmt.Println("About to store value")
 	err := rdb.Set(ctx, "key1", value, 0).Err()
 	if err != nil {
 		fmt.Println("Unable to store value")
