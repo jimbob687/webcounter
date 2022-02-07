@@ -1,4 +1,4 @@
-The solution
+The solution  
 A golang webserver has been created and built into an image which is pushed to docker hub.  
 Thhe image is deployed as a deployment behind a service. By default is set to be a single pod deployed, however the number can be increased.  
 THe golang server will connect to a redis instance behind a service, and will connect to it.  
